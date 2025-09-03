@@ -60,13 +60,13 @@ function removeFromCart(id) {
   renderCart();
 }
 
-// Mostrar carrito en carrito.html
+// Mostrar carrito 
 function renderCart() {
   const cart = getCart();
   const tbody = document.getElementById("cart-items");
   const totalSpan = document.getElementById("cart-total");
 
-  if (!tbody || !totalSpan) return; // Si no estamos en carrito.html
+  if (!tbody || !totalSpan) return; 
 
   tbody.innerHTML = "";
   let total = 0;
@@ -93,5 +93,5 @@ function renderCart() {
   totalSpan.textContent = total;
 }
 
-// Ejecutar solo en carrito.html
+
 document.addEventListener("DOMContentLoaded", renderCart);

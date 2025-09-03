@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pasteleria Wonderland</title>
   <link rel="icon" type="image/svg" href="assets/img/favicon/faviconnn.ico">
-  <link rel="stylesheet" href="assets/css/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <!--Header-->
@@ -24,7 +24,11 @@
               <ul class="sub-menu">
               <li class="menu-item"><a href="#">Tortas</a></li>
               <li class="menu-item"><a href="#">Postres</a></li>
-              <li class="menu-item"><a href="#">Salados</a></li>
+              <li class="menu-item"><a href="#">Pastelería Tradicional</a></li>
+              <li class="menu-item"><a href="#">Sin Ázucar</a></li>
+              <li class="menu-item"><a href="#">Sin Gluten</a></li>
+              <li class="menu-item"><a href="#">Vegano</a></li>
+              <li class="menu-item"><a href="#">Personaliza tu pedido</a></li>
               </ul>
           </li>
 
@@ -36,12 +40,64 @@
       </nav>
     </header>
     <!-- Main -->
-
+    <main>
+        <!-- Carrusel principal de inicio -->
+        <div id="Carousel" class="carousel slide carousel-fade">
+        <!-- Botones de los puntitos indicadores -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselInicio" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselInicio" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselInicio" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>    
+        <!-- Contenedor de las imágenes -->
+        <div class="carousel-inner">            
+            <!-- Primera imagen -->
+            <div class="carousel-item active">
+            <img src="assets/img/carousel-1.webp" class="d-block w-100" alt="Bandeja de panes de chocolate recién horneados en la pastelería">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Bienvenido al sabor de siempre</h5>
+                <p>Recién horneados, crujientes y con el aroma que despierta sonrisas. Te invitamos a comenzar tu día con lo mejor de nuestra pastelería.</p>
+            </div>
+            </div>
+            <!-- Segunda imagen -->
+            <div class="carousel-item">
+            <img src="assets/img/carousel-2.webp" class="d-block w-100" alt="Vista del interior acogedor de la pastelería con vitrinas y estantes de pan">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>El espacio que ya conoces</h5>
+                <p>Con años de tradición, nuestra pastelería sigue siendo el lugar donde disfrutas del sabor y la calidez de siempre.</p>
+            </div>
+            </div>
+            <!-- Tercera imagen -->
+            <div class="carousel-item">
+            <img src="assets/img/carousel-3.webp" class="d-block w-100" alt="Selección de tortas artesanales">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Tu torta, a tu manera</h5>
+                <p>Variedad de sabores únicos para cada ocasión especial.</p>
+            </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#Carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#Carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+        </div>
+    </main>
     <!--Footer-->
     <footer class="site-footer">
         <div class="footer-content">
             <p>&copy; Pastelería Wonderland — 2025</p>
             <a href="#">Política de privacidad</a>
+        </div>
+          <div class="footer-newsletter">
+            <h3>ÚNETE A NUESTRO CLUB</h3>
+            <form id="clubw_email_form" action="#">
+            <input id="email" type="email" name="email" placeholder="email@gmail.com" required>
+            <input type="submit" value="Unirme">
+            </form>
         </div>
     </footer>
     <!-- Bootstrap JS & JS -->

@@ -30,5 +30,11 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-
-
+//Carousel
+const myCarousel = document.querySelector('#Carousel');
+if (myCarousel) {
+  new bootstrap.Carousel(myCarousel, {
+    interval: 2000,  
+    touch: false     
+  });
+}

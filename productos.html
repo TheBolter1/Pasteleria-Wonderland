@@ -45,20 +45,15 @@
         <h2>Nuestros Productos</h2>
 
         <div class="producto">
-  <h3>Torta de Chocolate</h3>
-  <p>$15.990</p>
-  <button onclick="addToCart({id:1, nombre:'Torta de Chocolate', precio:15990, cantidad:1})">
-    Agregar al carrito 🛒
-  </button>
-</div>
 
-<div class="producto">
-  <h3>Postre de Frutilla</h3>
-  <p>$6.990</p>
-  <button onclick="addToCart({id:2, nombre:'Postre de Frutilla', precio:6990, cantidad:1})">
-    Agregar al carrito 🛒
-  </button>
-</div>
+
+  <main class="container my-5">
+  <h2>Nuestros Productos</h2>
+  <div id="productos-container" class="row g-4">
+    <!-- Aquí se insertarán los productos desde JS -->
+  </div>
+</main>
+
 
     <!--Footer-->
     <footer class="site-footer">
@@ -69,7 +64,11 @@
     </footer>
     <!-- Bootstrap JS & JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/storage.js"></script>  
     <script src="assets/js/script.js"></script>   
 </body>
 </html>
 
+<script>
+  document.addEventListener("DOMContentLoaded", renderProductos);
+</script>

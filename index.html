@@ -49,6 +49,7 @@
             <button type="button" data-bs-target="#carouselInicio" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselInicio" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>    
+        
         <!-- Contenedor de las imágenes -->
         <div class="carousel-inner">            
             <!-- Primera imagen -->
@@ -85,6 +86,51 @@
             <span class="visually-hidden">Siguiente</span>
         </button>
         </div>
+      <section class="banner-carta text-center py-5 mb-5">
+  <div class="container">
+    <h2 class="text-white mb-3"> Revisa nuestra carta</h2>
+    <a href="productos.html" class="btn btn-light btn-lg">Ver Productos</a>
+  </div>
+</section>
+
+
+<!-- Sección Productos más vendidos -->
+<section class="productos-mas-vendidos mt-5 my-5">
+  <div class="container">
+    <h2 class="text-center mb-4">🍰 Productos más vendidos</h2>
+    <div class="row g-4 justify-content-center" id="productos-mas-vendidos-container">
+      <!-- Productos insertados por JS -->
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const catalogo = JSON.parse(localStorage.getItem("catalogoProductos")) || [];
+  const container = document.getElementById("productos-mas-vendidos-container");
+
+  // tome los primeros 3 jijis 
+  const topProductos = catalogo.slice(0, 3);
+
+  topProductos.forEach(prod => {
+    const crearElemento = document.createElement("div");
+    crearElemento.className = "col-12 col-sm-6 col-md-4 col-lg-3";
+
+    crearElemento.innerHTML = `
+      <div class="card h-100 shadow-sm">
+        <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">${prod.nombre}</h5>
+          <p class="card-text">$${prod.precio.toLocaleString()}</p>
+          <a href="productos.html#${prod.id}" class="btn btn-primary mt-auto">Ver Producto</a>
+        </div>
+      </div>
+    `;
+    container.appendChild(crearElemento);
+  });
+});
+</script>
+
     </main>
     <!--Footer-->
     <footer class="site-footer">

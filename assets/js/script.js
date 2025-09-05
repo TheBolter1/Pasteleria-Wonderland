@@ -104,3 +104,4 @@ function renderCart() {
 
 
 document.addEventListener("DOMContentLoaded", renderCart);
+

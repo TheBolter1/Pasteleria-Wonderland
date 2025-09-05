@@ -1,18 +1,33 @@
 //Validación Inicio Sesión
 const Id_login = (id) => document.getElementById(id);
 
-// Pone el error en el campo y muestra el texto debajo
 function mostrarError(inputCampo, mensajeCampo, mensaje) {
   if (!inputCampo || !mensajeCampo) return;
   inputCampo.classList.add("is-invalid");
   mensajeCampo.textContent = mensaje;
 }
 
-// Limpia el error de un solo campo
 function limpiarError(inputCampo, mensajeCampo) {
   if (!inputCampo || !mensajeCampo) return;
   inputCampo.classList.remove("is-invalid");
   mensajeCampo.textContent = "";
+}
+
+async function esAdmin(correo, contrasena) {
+  try {
+
+    const resp = await fetch("assets/json/admin.json", { cache: "no-store" });
+    if (!resp.ok) return false;
+    const data = await resp.json();
+
+    if (data && typeof data === "object") {
+      return data.correo === correo && data.contrasena === contrasena;
+    }
+    return false;
+  } catch (e) {
+    console.error("Error leyendo admin.json:", e);
+    return false;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,28 +35,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputCorreo = Id_login("correo");
   const inputContrasena = Id_login("contrasena");
 
-  // **Usar los mismos IDs que están en el HTML**
   const errorCorreo = Id_login("errorCorreo");
   const errorContrasena = Id_login("errorContrasena");
 
   const alertaExito = Id_login("successAlert");
 
-  if (!formularioLogin) return; // por si acaso
+  if (!formularioLogin) return;
 
-  formularioLogin.addEventListener("submit", (evento) => {
+  formularioLogin.addEventListener("submit", async (evento) => {
     evento.preventDefault();
 
-    // 1) limpiar errores previos
     limpiarError(inputCorreo, errorCorreo);
     limpiarError(inputContrasena, errorContrasena);
 
-    // 2) tomar valores
     const valorCorreo = (inputCorreo?.value || "").trim();
     const valorContrasena = inputContrasena?.value || "";
 
     let formularioValido = true;
 
-    // 3) validaciones simples
     if (!valorCorreo) {
       mostrarError(inputCorreo, errorCorreo, "Ingresa tu correo.");
       formularioValido = false;
@@ -60,13 +71,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!formularioValido) return;
 
-    // 4) mostrar mensaje de éxito
-    if (alertaExito) {
-      alertaExito.textContent = "¡Inicio de sesión exitoso!";
-      alertaExito.classList.remove("d-none");
-      setTimeout(() => alertaExito.classList.add("d-none"), 3000);
-    }
+    const admin_autorizado = await esAdmin(valorCorreo, valorContrasena);
 
-    formularioLogin.reset();
+    if (admin_autorizado) {
+      sessionStorage.setItem("rol", "admin");
+      if (alertaExito) {
+        alertaExito.textContent = "Bienvenido/a, Administrador. Su acceso ha sido validado correctamente. Ya puede comenzar a gestionar el sistema. Le deseamos una jornada productiva.";
+        alertaExito.classList.remove("d-none");
+      }
+      setTimeout(() => {
+        window.location.href = "administrador.html";
+      }, 500);
+    } else {
+      mostrarError(inputCorreo, errorCorreo, "Credenciales inválidas.");
+      mostrarError(inputContrasena, errorContrasena, "Credenciales inválidas.");
+    }
   });
 });

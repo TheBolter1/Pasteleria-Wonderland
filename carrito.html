@@ -38,17 +38,17 @@
       </nav>
     </header>
     <!-- Main -->
-      <main>
+    <main>
         <img src="assets/img/pedido.webp" alt="Pastelería Wonderland" class="banner">
-        <div class="custom-alert soft">
+        <div class="custom-alert soft" >
           ¿Eres cliente? <a href="login.html" class="alert-link">Haz clic aquí para acceder</a>
         </div>
-          <section class="Carrito">
-            <section class="container my-5">
-              <div class="card p-4 shadow">
-                <h2 class="mb-4">🛒 Tu Carrito de Compras</h2>
-                <table class="table table-striped table-hover shadow-sm rounded">
-                  <thead class="table-dark">
+        <section id="Carrito">
+          <section class="container my-5">
+            <div class="card p-4 shadow">
+              <h2 class="mb-4">Carro de Compras</h2>
+              <table class="table table-striped table-hover shadow-sm rounded">
+                  <thead class="table-responsive">
                     <tr>
                       <th>Producto</th>
                       <th>Precio unitario</th>
@@ -57,17 +57,16 @@
                       <th>Acción</th>
                     </tr>
                   </thead>
-                  <tbody id="cart-items">
-                  </tbody>
-                </table>
-                <div class="text-end mt-3">
-      <a href="productos.html" class="btn btn-primary">Seguir Comprando</a>
-        <button class="btn btn-success">Finalizar Compra</button>
-          <button class="btn btn-danger" onclick="clearCart()">Eliminar carrito 🗑️</button>
-        </div>
-       </div>
-        </section>
+                  <tbody id="cart-items"></tbody>
+              </table>
+              <div class="text-end mt-3">
+                <a href="productos.html" class="btn btn-primary">Seguir Comprando</a>
+                <button class="btn btn-success">Finalizar Compra</button>
+                <button class="btn btn-danger" onclick="clearCart()">Eliminar carrito</button>
+              </div>
+            </div>
           </section>
+        </section>
     </main>
     <!--Footer-->
     <footer class="site-footer">

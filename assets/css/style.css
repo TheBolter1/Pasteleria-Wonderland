@@ -193,20 +193,18 @@ header {
   border-radius: 0; 
 }
 
-/* Cada ítem del carousel */
 #Carousel .carousel-item {
   position: relative;
-  height: 380px;              /* <— AJUSTA AQUÍ el alto del banner */
+  height: 380px;             
 }
 
-/* La imagen se adapta al alto del slide */
 #Carousel .carousel-item img {
-  position: absolute;         /* ocupa todo el item */
-  inset: 0;                   /* top/right/bottom/left: 0 */
+  position: absolute;         
+  inset: 0;                   
   width: 100%;
   height: 100%;
   object-fit: cover;          /* recorta sin deformar */
-  object-position: center;    /* centra el recorte */
+  object-position: center;    
   display: block;
 }
 
@@ -239,6 +237,43 @@ header {
 @media (max-width: 480px) {
   #Carousel .carousel-item { height: 180px; }
 }
+/* Banner */
+#bannerInicio {
+  width: 100%;
+  background-color: var(--color-primary);   
+  margin: 0 0 3rem 0;
+  text-align: center;
+}
+
+#bannerInicio a {
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 3vw;
+  font-weight: 1000;
+  letter-spacing: .04em;
+  color: #fff;                              
+  padding: 1rem 0;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  transition: background-color .2s ease;
+}
+
+#bannerInicio a:hover {
+  background-color: var(--color-secondary); 
+}
+
+#bannerInicio a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -3px;
+  box-shadow: 0 0 0 3px rgba(0,0,0,.15);
+}
+
+@media (min-width: 768px){
+  #bannerInicio a {
+    padding: 1.25rem 0;
+  }
+}
+
 /*Carrito de Compras*/
 .banner {
   width: 100%;
@@ -257,7 +292,7 @@ header {
   box-shadow: none; /* más plano */
 }
 
-.custom-alert.soft .alert-link {
+ .custom-alert.soft .alert-link {
   color: var(--color-primary);
   font-weight: 600;
   text-decoration: underline;
@@ -266,11 +301,35 @@ header {
 .custom-alert strong {
   font-weight: 600;
 }
-
-
 .custom-alert .alert-link:hover {
   text-decoration: none;
   opacity: 0.85;
+}
+
+#Carrito .card{
+  max-width: none;   /* quita el tope de 440px */
+  width: 100%;
+}
+#Carrito .card .card-body{
+  padding: 28px;     /* opcional: si quieres mantener tu padding */
+}
+
+#Carrito .table thead {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+#Carrito .btn-primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+#Carrito .btn-success {
+  background: var(--color-success);
+  border-color: var(--color-success);
+}
+#Carrito .btn-danger {
+  background: var(--color-error);
+  border-color: var(--color-error);
 }
 /*Footer*/
 /*Quiero que quede claro que esto es provicional pero necesitaba verlo en pedido, lo 
@@ -367,19 +426,16 @@ body{
   padding:24px;
 }
 
-.card{
+#Login .card{
   width:100%;
   max-width: 440px;
-  background: #fff;
+  background:#fff;
   border:1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  overflow: hidden;
+  overflow:hidden;
 }
-
-.card-body{
-  padding: 28px;
-}
+#Login .card-body{ padding:28px; }
 
 /* Título */
 h2{

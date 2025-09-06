@@ -49,7 +49,7 @@ function saveCart(cart) {
 }
 
 function addToCart(product) {
-  let cart = getCart(); // ✅ obtener carrito actual
+  let cart = getCart(); 
 
   let existing = cart.find(item => item.id === product.id);
 
@@ -164,8 +164,9 @@ function renderCart() {
   totalSpan.textContent = total;
 }
 
+//----------------------------------------------------------------------------------------
+//Carrito de compras
 document.addEventListener("DOMContentLoaded", renderCart);
-
 
 function renderProductos() {
   const catalogo = JSON.parse(localStorage.getItem("catalogoProductos")) || [];
@@ -205,8 +206,33 @@ function clearCart() {
   renderCart(); // vuelve a pintar la tabla (queda vacía)
 }
 
-
 // Llamar solo si estamos en productos.html
 document.addEventListener("DOMContentLoaded", () => {
   renderProductos();
+});
+//--------------------------------------------------------------------
+//Productos de mayor venta 
+document.addEventListener("DOMContentLoaded", () => {
+  const catalogo = JSON.parse(localStorage.getItem("catalogoProductos")) || [];
+  const container = document.getElementById("productos-mas-vendidos-container");
+
+  // tome los primeros 3 jijis 
+  const topProductos = catalogo.slice(0, 3);
+
+  topProductos.forEach(prod => {
+    const crearElemento = document.createElement("div");
+    crearElemento.className = "col-12 col-sm-6 col-md-4 col-lg-3";
+
+    crearElemento.innerHTML = `
+      <div class="card h-100 shadow-sm">
+        <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">${prod.nombre}</h5>
+          <p class="card-text">$${prod.precio.toLocaleString()}</p>
+          <a href="productos.html#${prod.id}" class="btn btn-primary mt-auto">Ver Producto</a>
+        </div>
+      </div>
+    `;
+    container.appendChild(crearElemento);
+  });
 });

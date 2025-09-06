@@ -171,11 +171,27 @@ document.addEventListener("DOMContentLoaded", renderCart);
 function renderProductos() {
   const catalogo = JSON.parse(localStorage.getItem("catalogoProductos")) || [];
   const contenedor = document.getElementById("productos-container");
-  if (!contenedor) return; // por si no estamos en productos.html
+  if (!contenedor) return;
 
   contenedor.innerHTML = "";
 
-  catalogo.forEach(prod => {
+  // --- leer categoría desde la URL ---
+  const params = new URLSearchParams(window.location.search);
+  const categoria = params.get("categoria"); 
+
+  let productosMostrar = catalogo;
+  if (categoria) {
+    productosMostrar = catalogo.filter(prod => prod.categoria.includes(categoria));
+    const titulo = document.querySelector("main h2");
+    if (titulo) titulo.textContent = `Productos: ${categoria}`;
+  }
+
+  if (productosMostrar.length === 0) {
+    contenedor.innerHTML = `<p>No hay productos en esta categoría 🛍️</p>`;
+    return;
+  }
+
+  productosMostrar.forEach(prod => {
     const muestraTortas = document.createElement("div");
     muestraTortas.className = "col-md-4 col-lg-3";
 

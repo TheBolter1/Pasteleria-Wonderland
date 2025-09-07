@@ -1,0 +1,84 @@
+/* ===== Formularios y botones genéricos ===== */
+/* Etiquetas y filas */
+.label{
+  display: block;
+  font-size: 12px;
+  letter-spacing: .06em;
+  color: var(--color-muted);
+  margin-bottom: 6px;
+}
+.form-row{ display: grid; gap: var(--space-md); }
+
+/* Controles */
+.form-control,
+input[type="text"], input[type="email"], input[type="password"],
+input[type="number"], input[type="date"], select, textarea{
+  width: 100%;
+  height: var(--h-input);
+  padding: 0 14px;
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+textarea.form-control, textarea{ min-height: 120px; padding: 12px 14px; height: auto; }
+.form-control::placeholder{ color: #b0b3a6; }
+
+.form-control:focus,
+input:focus, select:focus, textarea:focus{
+  border-color: var(--color-primary);
+  box-shadow: var(--focus-ring);
+}
+
+/* Estados simples */
+.field.error .form-control{ border-color:#d66; }
+.field.error .label{ color:#d66; }
+
+/* Botones */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  height: var(--h-button);
+  padding: 0 18px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+  transition: filter .15s ease, transform .02s ease;
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: inherit;
+  background: #fff;
+}
+.btn:active{ transform: translateY(1px); }
+
+/* Variantes (usa tu paleta) */
+.btn-primary{
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+.btn-primary:hover{ filter: brightness(.95); }
+
+.btn-outline{
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.btn-outline:hover{
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* Input group simple */
+.input-group{ display: flex; }
+.input-group > .form-control{ border-radius: var(--radius) 0 0 var(--radius); }
+.input-group > .btn,
+.input-group > .input-action{
+  border-radius: 0 var(--radius) var(--radius) 0;
+}

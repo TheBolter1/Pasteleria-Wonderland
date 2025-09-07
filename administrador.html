@@ -8,14 +8,15 @@
   integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="icon" type="image/svg" href="assets/img/favicon/faviconnn.ico">  
-  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/components/siderbar.css">
+  <link rel="stylesheet" href="assets/css/section/admin.css">
 </head>
     <script>
       if (sessionStorage.getItem("rol") !== "admin") {
         window.location.replace("login.html");
       }
     </script>
-  <body id="Admin">
+<body>
     <!--Header-->
     <header>
       <nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
@@ -43,18 +44,129 @@
               </li>
             </ul>
           </div>
+          <button class="btn btn-outline-secondary ms-2" type="button"
+                  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                  aria-label="Abrir menú">
+            <i class="bi bi-list"></i>
+          </button>
         </div>
       </nav>
     </header>
     <!-- Main -->
-    <main>
-      <section id="barraLateral">
+        <div class="tab-content">
 
-      </section>      
-    </main>  
+          <!-- HOME -->
+          <section class="tab-pane fade show active" id="tabHome">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div>
+                <h1 class="h3 mb-0">¡Hola, Administrador!</h1>
+                <p class="text-muted mb-0">Resumen del día y actividades recientes.</p>
+              </div>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProducto">
+                <i class="bi bi-plus-lg me-1"></i> Agregar producto
+              </button>
+            </div>
+
+            <div class="row g-3 mb-4">
+              <div class="col-6 col-md-3"><div class="card shadow-sm"><div class="card-body">
+                <div class="d-flex justify-content-between"><span class="text-muted">Ventas (hoy)</span><i class="bi bi-currency-dollar"></i></div>
+                <div class="fs-4 fw-semibold mt-1" id="kpi-ventas">$ 0</div>
+                <div class="small text-success"><i class="bi bi-arrow-up-right me-1"></i>+0% vs ayer</div>
+              </div></div></div>
+              <div class="col-6 col-md-3"><div class="card shadow-sm"><div class="card-body">
+                <div class="d-flex justify-content-between"><span class="text-muted">Pedidos</span><i class="bi bi-bag-check"></i></div>
+                <div class="fs-4 fw-semibold mt-1" id="kpi-pedidos">0</div>
+                <div class="small text-muted">0 pendientes</div>
+              </div></div></div>
+              <div class="col-6 col-md-3"><div class="card shadow-sm"><div class="card-body">
+                <div class="d-flex justify-content-between"><span class="text-muted">Stock bajo</span><i class="bi bi-exclamation-triangle"></i></div>
+                <div class="fs-4 fw-semibold mt-1" id="kpi-stock-bajo">0</div>
+                <div class="small text-danger">Reponer hoy</div>
+              </div></div></div>
+              <div class="col-6 col-md-3"><div class="card shadow-sm"><div class="card-body">
+                <div class="d-flex justify-content-between"><span class="text-muted">Clientes nuevos</span><i class="bi bi-people"></i></div>
+                <div class="fs-4 fw-semibold mt-1" id="kpi-clientes">0</div>
+                <div class="small text-success">+0 esta semana</div>
+              </div></div></div>
+            </div>
+          </section>
+
+          <!-- PRODUCTOS: Nuevo / Editar / Mostrar -->
+          <section class="tab-pane fade" id="tabProductos">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h2 class="h4 mb-0">Producto</h2>
+              <div class="btn-group">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProducto"><i class="bi bi-plus-circle me-1"></i> Nuevo</button>
+                <button class="btn btn-outline-secondary" onclick="seleccionarPrimero('productos')"><i class="bi bi-pencil-square me-1"></i> Editar</button>
+              </div>
+            </div>
+
+            <div class="card shadow-sm mb-3">
+              <div class="card-header fw-semibold">Mostrar producto</div>
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" id="tabla-productos">
+                  <thead class="table-light">
+                    <tr>
+                      <th>#</th><th>Nombre</th><th>Precio</th><th>Stock</th>
+                      <th class="text-end">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody><!-- render dinámico --></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- USUARIOS: Nuevo / Editar / Mostrar -->
+          <section class="tab-pane fade" id="tabUsuarios">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h2 class="h4 mb-0">Usuario</h2>
+              <div class="btn-group">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUsuario"><i class="bi bi-person-plus me-1"></i> Nuevo</button>
+                <button class="btn btn-outline-secondary" onclick="seleccionarPrimero('usuarios')"><i class="bi bi-pencil-square me-1"></i> Editar</button>
+              </div>
+            </div>
+
+            <div class="card shadow-sm mb-3">
+              <div class="card-header fw-semibold">Mostrar usuario</div>
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" id="tabla-usuarios">
+                  <thead class="table-light">
+                    <tr>
+                      <th>#</th><th>Nombre</th><th>Correo</th><th>Rol</th>
+                      <th class="text-end">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody><!-- render dinámico --></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- REPORTES (placeholder) -->
+          <section class="tab-pane fade" id="tabReportes">
+            <div class="card shadow-sm"><div class="card-body">
+              <h5 class="card-title">Reportes</h5>
+              <p class="text-muted">Conecta tus gráficos aquí (Chart.js).</p>
+            </div></div>
+          </section>
+
+          <!-- PEDIDOS (placeholder) -->
+          <section class="tab-pane fade" id="tabPedidos">
+            <div class="card shadow-sm"><div class="card-body">
+              <h5 class="card-title">Pedidos</h5>
+              <p class="text-muted">Tabla de pedidos y flujo propio.</p>
+            </div></div>
+          </section>
+
+        </div>
+      </main>
+    </div>
+  </div>
+</main>  
     <!--Footer-->
-    <footer class=" ">
-
+    <footer id="site-footer-admin">
+      <small>© Pastelería Wonderland — Admin</small>
     </footer>
     <!-- Bootstrap JS & JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,0 +1,57 @@
+/* ===== Cards genéricas ===== */
+.card{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  background: #fff;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.card.is-hoverable:hover{
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.card-body{ padding: 1.25rem; display: flex; flex-direction: column; gap: .25rem; }
+
+/* Título con clamp simple a 2 líneas */
+.card-title{
+  margin-bottom: .25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;                 /* estándar (cuando esté disponible) */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 3rem;              /* alinea alturas entre cards */
+}
+
+/* Imagen de portada consistente (aplícale class="card-img-cover") */
+.card-img-cover{
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+
+/* Precio + botón al fondo (si tu card lo usa) */
+.card .precio{
+  font-weight: 600;
+  color: var(--color-text);
+  margin-top: .25rem;
+}
+.card .btn{ margin-top: auto; width: 100%; height: var(--h-button); }
+
+/* Cinta opcional (útil para “Más vendido”) */
+.card.has-ribbon{ position: relative; }
+.card.has-ribbon::after{
+  content: attr(data-ribbon);
+  position: absolute; top: 12px; left: -36px;
+  background: var(--color-secondary);
+  color: #fff; font-weight: 700; font-size: .8rem;
+  padding: 6px 48px;
+  transform: rotate(-12deg);
+  box-shadow: var(--shadow-sm);
+}

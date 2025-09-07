@@ -30,14 +30,16 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-//Carousel
-const myCarousel = document.querySelector('#Carousel');
-if (myCarousel) {
-  new bootstrap.Carousel(myCarousel, {
-    interval: 2000,  
-    touch: false     
-  });
-}
+//Carousel (solo si existe y si está bootstrap disponible)
+(function () {
+  const myCarousel = document.querySelector('#Carousel');
+  if (myCarousel && window.bootstrap?.Carousel) {
+    new bootstrap.Carousel(myCarousel, {
+      interval: 2000,
+      touch: false
+    });
+  }
+})();
 
  // --- Carrito usando localStorage ---
 function getCart() {
@@ -139,7 +141,7 @@ function renderCart() {
   let total = 0;
 
   if (cart.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="5">Tu carrito está vacío 🛍️</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="5">Tu carrito está vacío</td></tr>`;
   } else {
     cart.forEach(item => {
       const subtotal = item.precio * item.cantidad;
@@ -148,20 +150,27 @@ function renderCart() {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${item.nombre}</td>
-        <td>$${item.precio}</td>
-        <td>
-          <button class="btn btn-sm btn-secondary" onclick="decreaseQuantity('${item.id}')">-</button>
-          ${item.cantidad}
-          <button class="btn btn-sm btn-secondary" onclick="increaseQuantity('${item.id}')">+</button>
+        <td>$${item.precio.toLocaleString('es-CL')}</td>
+        <td class="cantidad-td">
+          <button class="btn btn-sm btn-secondary cantidad-btn"
+            onclick="decreaseQuantity('${item.id}')">−</button>
+          <span class="cantidad-badge" id="cant-${item.id}">${item.cantidad}</span>
+          <button class="btn btn-sm btn-secondary cantidad-btn"
+            onclick="increaseQuantity('${item.id}')">+</button>
         </td>
-        <td>$${subtotal}</td>
-        <td><button class="btn btn-danger btn-sm" onclick="removeProduct('${item.id}')">Eliminar todo</button></td>
+        <td>$<span id="sub-${item.id}">
+            ${(item.precio * item.cantidad).toLocaleString('es-CL')}
+        </span></td>
+        <td>
+          <button class="btn btn-danger btn-sm"
+            onclick="removeProduct('${item.id}')">Eliminar todo</button>
+        </td>
       `;
       tbody.appendChild(row);
     });
   }
 
-  totalSpan.textContent = total;
+  totalSpan.textContent = total.toLocaleString('es-CL');
 }
 
 //----------------------------------------------------------------------------------------
@@ -187,17 +196,17 @@ function renderProductos() {
   }
 
   if (productosMostrar.length === 0) {
-    contenedor.innerHTML = `<p>No hay productos en esta categoría 🛍️</p>`;
+    contenedor.innerHTML = `<p>No hay productos en esta categoría</p>`;
     return;
   }
 
   productosMostrar.forEach(prod => {
     const muestraTortas = document.createElement("div");
-    muestraTortas.className = "col-md-4 col-lg-3";
+    muestraTortas.className = "col-12 col-sm-6 col-md-4 col-lg-3";
 
     muestraTortas.innerHTML = `
       <div class="card h-100 shadow-sm">
-        <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}">
+        <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}" id="productos-card">
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">${prod.nombre}</h5>
           <p class="card-text">$${prod.precio.toLocaleString()}</p>
@@ -207,7 +216,7 @@ function renderProductos() {
             precio: ${prod.precio}, 
             cantidad: 1
           })">
-            Agregar al carrito 🛒
+            Agregar al carrito
           </button>
         </div>
       </div>
@@ -230,10 +239,10 @@ document.addEventListener("DOMContentLoaded", () => {
 //Productos de mayor venta 
 document.addEventListener("DOMContentLoaded", () => {
   const catalogo = JSON.parse(localStorage.getItem("catalogoProductos")) || [];
-  const container = document.getElementById("productos-mas-vendidos-container");
+  const container = document.getElementById("top-ventas-container");
 
   // tome los primeros 3 jijis 
-  const topProductos = catalogo.slice(0, 3);
+  const topProductos = catalogo.slice(0, 4);
 
   topProductos.forEach(prod => {
     const crearElemento = document.createElement("div");
@@ -252,3 +261,95 @@ document.addEventListener("DOMContentLoaded", () => {
     container.appendChild(crearElemento);
   });
 });
+
+//Contacto.html
+  (function contacto() {
+    const formContacto = document.getElementById('form-contacto');
+    if (!formContacto) return; // si no estamos en contacto.html, salir
+
+    // Mostrar/ocultar Nº de orden según "Soporte de pedido"
+    const ordenInput   = document.getElementById('orden');
+    const radiosMotivo = document.querySelectorAll('input[name="motivo"]');
+
+    const toggleOrden = () => {
+      if (!ordenInput) return;
+      const esSoporte = [...radiosMotivo].some(r => r.checked && r.id === 'motivo-pedido');
+      const grupoOrden = ordenInput.closest('.mb-3'); // tu markup
+      if (grupoOrden) grupoOrden.style.display = esSoporte ? '' : 'none';
+    };
+    radiosMotivo.forEach(r => r.addEventListener('change', toggleOrden));
+    toggleOrden();
+
+    // Guardar en localStorage
+    const STORAGE_KEY = 'pw_contactos';
+    formContacto.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const fd = new FormData(formContacto);
+      const nuevo = {
+        nombre : (fd.get('nombre')  || '').trim(),
+        email  : (fd.get('correo')  || '').trim(),
+        orden  : (fd.get('orden')   || '').trim(),
+        mensaje: (fd.get('mensaje') || '').trim(),
+        fecha  : Date.now()
+      };
+
+      const lista = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      lista.unshift(nuevo);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
+
+      formContacto.reset();
+      toggleOrden(); // para ocultar orden si vuelve a "Otros"
+      alert('¡Mensaje enviado!');
+    });
+
+    // (Opcional) Si tienes una tabla de “admin” para ver mensajes:
+    const tablaCuerpo = document.getElementById('tabla-contactos-body');
+    if (tablaCuerpo) {
+      const escapar = (t='') => t.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      const items = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      tablaCuerpo.innerHTML = items.length
+        ? items.map((c,i)=>`
+            <tr>
+              <td>${i+1}</td>
+              <td>${new Date(c.fecha).toLocaleString('es-CL')}</td>
+              <td>${escapar(c.nombre)}</td>
+              <td><a href="mailto:${escapar(c.email)}">${escapar(c.email)}</a></td>
+              <td>${escapar(c.orden || '')}</td>
+              <td style="white-space:pre-wrap;max-width:480px">${escapar(c.mensaje)}</td>
+            </tr>`).join('')
+        : `<tr><td colspan="6" class="text-muted text-center">Sin mensajes.</td></tr>`;
+    }
+  })();
+
+  //SideBar
+  const sidebar   = document.getElementById('sidebar');
+  const main      = document.getElementById('main');
+  const btnToggle = document.getElementById('sidebarToggle');
+  const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
+
+  // Restaurar preferencia (solo escritorio)
+  if (localStorage.getItem('sb-collapsed') === '1') {
+    document.body.classList.add('sidebar-collapsed');
+  }
+
+  btnToggle?.addEventListener('click', () => {
+    if (isDesktop()) {
+      document.body.classList.toggle('sidebar-collapsed');
+      localStorage.setItem(
+        'sb-collapsed',
+        document.body.classList.contains('sidebar-collapsed') ? '1' : '0'
+      );
+    } else {
+      // Comportamiento móvil (off-canvas)
+      sidebar.classList.toggle('is-open');
+    }
+  });
+
+  // Cerrar off-canvas al hacer click fuera en móvil (opcional)
+  document.addEventListener('click', (e) => {
+    if (!isDesktop() && sidebar.classList.contains('is-open')) {
+      const clickInside = e.target.closest('#sidebar') || e.target.closest('#sidebarToggle');
+      if (!clickInside) sidebar.classList.remove('is-open');
+    }
+  });

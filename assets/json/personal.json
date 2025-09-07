@@ -1,0 +1,38 @@
+[
+  {
+    "rut": 15123456,
+    "dv": "9",
+    "nombres": "Camila Andrea",
+    "apellido1": "Muñoz",
+    "apellido2": "Rojas",
+    "correo": "c.munoz@wonderland.cl",
+    "fecha_nacimiento": "1991-07-14",
+    "direccion": "Av. Irarrázaval 333, Ñuñoa, Región Metropolitana",
+    "telefono": "+56 9 6123 4567",
+    "cargo": "Maestra Pastelera"
+  },
+  {
+    "rut": 17345678,
+    "dv": "6",
+    "nombres": "Esteban Ignacio",
+    "apellido1": "González",
+    "apellido2": "Pavez",
+    "correo": "e.gonzalez@wonderland.cl",
+    "fecha_nacimiento": "1987-03-22",
+    "direccion": "Av. Libertador Bernardo O'Higgins 1234, Santiago, Región Metropolitana",
+    "telefono": "+56 9 7345 6789",
+    "cargo": "Decorador de Tortas"
+  },
+  {
+    "rut": 20567890,
+    "dv": "5",
+    "nombres": "Valentina Sofía",
+    "apellido1": "Araya",
+    "apellido2": "Contreras",
+    "correo": "v.araya@wonderland.cl",
+    "fecha_nacimiento": "1995-11-05",
+    "direccion": "Av. Concha y Toro 567, Puente Alto, Región Metropolitana",
+    "telefono": "+56 9 8432 1098",
+    "cargo": "Vendedora de Mostrador"
+  }
+]

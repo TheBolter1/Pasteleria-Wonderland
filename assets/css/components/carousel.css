@@ -1,0 +1,59 @@
+/* ===== Carousel (Home) ===== */
+#Carousel{
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 0;
+  --carousel-h-desktop: 500px;
+  --carousel-h-md: 220px;
+  --carousel-h-sm: 180px;
+}
+
+#Carousel .carousel-item{
+  position: relative;
+  height: var(--carousel-h-desktop);
+}
+
+#Carousel .carousel-item img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Overlay suave para mejorar contraste del texto */
+#Carousel .carousel-item::after{
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.0) 40%, rgba(0,0,0,.25) 100%);
+}
+
+#Carousel .carousel-caption{
+  text-shadow: 0 1px 8px rgba(0,0,0,.25);
+}
+
+/* Controles */
+#Carousel .carousel-control-prev,
+#Carousel .carousel-control-next{ width: 12%; }
+
+#Carousel .carousel-control-prev-icon,
+#Carousel .carousel-control-next-icon{
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.35));
+  transform: scale(1.05);
+}
+
+/* Responsive */
+#Carousel .carousel-item{
+  position: relative;
+  height: var(--carousel-h-desktop, 320px);
+}
+@media (max-width: 768px){
+  #Carousel .carousel-item{ height: var(--carousel-h-md, 220px); }
+}
+@media (max-width: 480px){
+  #Carousel .carousel-item{ height: var(--carousel-h-sm, 180px); }
+}

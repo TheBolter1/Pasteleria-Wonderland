@@ -5,23 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contacto | Pasteleria Wonderland</title>
   <link rel="icon" type="image/svg" href="assets/img/favicon/faviconnn.ico">
-  <link rel="stylesheet" href="assets/css/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">  
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">  
+  <link rel="stylesheet" href="assets/css/core/variables.css">
+  <link rel="stylesheet" href="assets/css/core/base.css">
+  <link rel="stylesheet" href="assets/css/core/layout.css">
+  <link rel="stylesheet" href="assets/css/core/utilities.css">
+  <link rel="stylesheet" href="assets/css/components/cards.css">
+  <link rel="stylesheet" href="assets/css/components/alerts.css">
+  <link rel="stylesheet" href="assets/css/components/forms.css">
+  <link rel="stylesheet" href="assets/css/pages/contacto.css">  
 </head>
 <body>
     <!--Header-->
     <header>
       <nav class="nav">
-          <a class="logo"></a>
-
+        <img src="assets/img/logo.png" alt="Pastelería Wonderland" class="logo-img">
           <ul class="menu">
           <li class="menu-item"><a href="index.html">Inicio</a></li>
 
           <li class="menu-item has-children">
-              <a href="productos.html">Productos</a>
+              <a href="productos.html">Productos ▾</a>
               <button class="submenu-toggle">▾</button>
-             <ul class="sub-menu">
+              <ul class="sub-menu">
                 <li class="menu-item"><a href="productos.html?categoria=Tortas Cuadradas">Tortas Cuadradas</a></li>
                 <li class="menu-item"><a href="productos.html?categoria=Tortas Circulares">Tortas Circulares</a></li>
                 <li class="menu-item"><a href="productos.html?categoria=Postres Individuales">Postres</a></li>
@@ -31,26 +39,144 @@
                 <li class="menu-item"><a href="productos.html?categoria=Productos Vegana">Vegano</a></li>
                 <li class="menu-item"><a href="productos.html?categoria=Tortas Especiales">Tortas Especiales</a></li>
                 </ul>
-                  
 
           <li class="menu-item"><a href="contacto.html">Contactanos</a></li>
-          <li class="menu-item"><a href="#">Mi Cuenta</a></li>
+          <li class="menu-item"><a href="login.html">Mi Cuenta</a></li>
           </ul>
 
           <a href="carrito.html" class="action-btn">Carrito de Compras</a>
       </nav>
     </header>
     <!-- Main -->
-
-    <!--Footer-->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <p>&copy; Pastelería Wonderland — 2025</p>
-            <a href="#">Política de privacidad</a>
+     <main>
+        <div id="banner-contacto">
+            <img src="assets/img/contactanos.webp" alt="Pastelería Wonderland" class="banner">
+            <p id="letra-b-contacto">Contáctanos</p>
         </div>
+        <section class="container my-5" id="contacto-card">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                <div class="card contacto-card border-0">
+                    <div class="card-body p-4 p-md-5">
+                    <h2 class="section-title text-center mb-2">Hablemos</h2>
+                    <span class="title-underline mx-auto d-block mb-3"></span>
+                    <p class="text-center soft-muted mb-4">
+                        Canal de contacto para <strong>pedidos grandes</strong>, <strong>ventas corporativas</strong> y 
+                        <strong>soporte de pedidos</strong>. Déjanos tus datos y te responderemos a la brevedad.
+                    </p>
+                    <form id="form-contacto" novalidate>
+                        <!-- Motivo (chips) -->
+                        <div class="mb-3">
+                        <label class="form-label">Motivo</label>
+                        <div class="d-flex flex-wrap gap-2">
+                            <input class="btn-check" type="radio" name="motivo" id="motivo-pedido" value="Soporte de pedido" checked>
+                            <label class="btn btn-sm chip" for="motivo-pedido">Soporte de pedido</label>
+
+                            <input class="btn-check" type="radio" name="motivo" id="motivo-corporativo" value="Venta corporativa">
+                            <label class="btn btn-sm chip" for="motivo-corporativo">Venta corporativa</label>
+
+                            <input class="btn-check" type="radio" name="motivo" id="motivo-otros" value="Otros">
+                            <label class="btn btn-sm chip" for="motivo-otros">Otros</label>
+                        </div>
+                        </div>
+                        <!-- Nombre -->
+                        <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre completo</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre"
+                                placeholder="Tu nombre" required>
+                        <div class="invalid-feedback">Ingresa tu nombre.</div>
+                        </div>
+                        <!-- Correo -->
+                        <div class="mb-3">
+                        <label for="correo" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="correo" name="correo"
+                                placeholder="ejemplo@correo.cl" required>
+                        <div class="invalid-feedback">Ingresa un correo válido.</div>
+                        </div>
+                        <!-- Nº de orden -->
+                        <div class="mb-3">
+                        <label for="orden" class="form-label">Número de orden <span class="soft-muted">(opcional)</span></label>
+                        <input type="text" class="form-control" id="orden" name="orden"
+                                placeholder="Si tu mensaje es por un pedido, incluye el número (ej. #12345)">
+                        </div>
+                        <!-- Mensaje -->
+                        <div class="mb-3">
+                        <label for="mensaje" class="form-label">Mensaje</label>
+                        <textarea class="form-control" id="mensaje" name="mensaje" rows="5"
+                            placeholder="Cuéntanos en qué podemos ayudarte."
+                            required></textarea>
+                        <div class="invalid-feedback">Escribe un mensaje.</div>
+                        </div>
+                        <!-- Acciones -->
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
+                        <button type="reset" class="btn btn-light btn-sm">Limpiar</button>
+                        <button type="submit" class="btn btn-success btn-sm">Enviar</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+     </main>
+    <!--Footer-->
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer container">
+        <!-- IZQUIERDA -->
+        <div class="footer-left">
+          <ul class="footer-links" aria-label="Secciones del sitio (no interactivas)">
+            <a href="#">Nosotros</a>
+            <a href="#">Tiendas</a>
+            <a href="#">Despacho y retiro</a>
+            <a href="#">Preguntas frecuentes</a>
+            <a href="#">Política de privacidad</a>
+          </ul>
+          <!-- CUIDADO: este <ul> se cierra aquí -->
+          <ul class="footer-social" aria-label="Redes sociales (iniciar sesión)">
+            <li>
+              <a class="icon" href="https://www.instagram.com/accounts/login/"
+                target="_blank" rel="noopener noreferrer nofollow"
+                aria-label="Iniciar sesión en Instagram">
+                <i class="bi bi-instagram" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a class="icon" href="https://www.facebook.com/login/"
+                target="_blank" rel="noopener noreferrer nofollow"
+                aria-label="Iniciar sesión en Facebook">
+                <i class="bi bi-facebook" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a class="icon" href="https://www.tiktok.com/login"
+                target="_blank" rel="noopener noreferrer nofollow"
+                aria-label="Iniciar sesión en TikTok">
+                <i class="bi bi-tiktok" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- CENTRO -->
+        <div class="footer-center">
+          <img src="assets/img/footer.png" alt="Pastelería Wonderland" class="footer-logo">
+        </div>
+        <!-- DERECHA -->
+        <div class="footer-right">
+          <p class="footer-cta">Únete a nuestro club</p>
+          <form id="clubw_email_form" class="footer-form" action="#">
+            <input id="email" type="email" name="email" placeholder="ejemplo@correo.cl" required>
+            <button type="submit" class="btn-primario">Unirme</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© Pastelería Wonderland — 2025</p>
+      </div>
     </footer>
     <!-- Bootstrap JS & JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/contacto-formulario.js"></script>   
     <script src="assets/js/script.js"></script>   
 </body>
 </html>

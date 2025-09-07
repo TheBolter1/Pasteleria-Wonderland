@@ -1,0 +1,202 @@
+/* ===== Carrito (página) ===== */
+
+/* --------------------------------
+   Banner superior
+--------------------------------- */
+.banner{
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+}
+
+/* --------------------------------
+   Contenedor principal
+--------------------------------- */
+#Carrito .container{ max-width: 1040px; }
+
+/* --------------------------------
+   Tarjeta
+--------------------------------- */
+#Carrito .card{
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+#Carrito .card .card-body,
+#Carrito .card.p-4{ padding: 24px; }
+
+/* --------------------------------
+   Título
+--------------------------------- */
+#Carrito h2{
+  margin: 0 0 1rem;
+  font-weight: 700;
+  letter-spacing: .01em;
+  font-size: clamp(1.4rem, 1rem + 1vw, 2rem);
+  color: var(--color-text);
+}
+
+/* --------------------------------
+   Tabla
+--------------------------------- */
+#Carrito .table{
+  --bs-table-striped-bg: color-mix(in srgb, var(--color-border) 18%, #fff);
+  --bs-table-hover-bg: color-mix(in srgb, var(--color-primary) 10%, #fff);
+}
+#Carrito .table thead{
+  background: var(--color-primary);
+  color: #fff;
+}
+#Carrito .table thead th{
+  font-weight: 600;
+  border: 0;
+}
+#Carrito .table th,
+#Carrito .table td{
+  padding: .9rem 1rem;
+  vertical-align: middle;
+}
+#Carrito td .btn{
+  height: 36px;
+  padding: 0 12px;
+  font-size: .9rem;
+}
+
+/* --------------------------------
+   Controles de cantidad
+--------------------------------- */
+/* Contenedor para que no salte de línea */
+.cantidad-td{
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Reestiliza tus mismos botones Bootstrap pequeños */
+.cantidad-btn{
+  width:36px; height:36px; padding:0;
+  border-radius: var(--radius);
+  background: var(--color-secondary);      /* ← color más “dulce” */
+  border: 1px solid var(--color-secondary);
+  color:#fff;
+  box-shadow: var(--shadow-sm);
+  font-weight:700; line-height:1;
+  transition: filter .15s ease, transform .02s ease;
+}
+.cantidad-btn:hover{ filter: brightness(.95); }
+.cantidad-btn:active{ transform: translateY(1px); }
+.cantidad-btn:focus-visible{ outline: none; box-shadow: var(--focus-ring); }
+
+/* Pastilla para el número */
+.cantidad-badge{
+  display:inline-block;
+  min-width:44px; height:36px; line-height:34px;
+  margin:0 6px;
+  text-align:center; font-weight:600;
+  background:#fff; color:var(--color-text);
+  border:1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --------------------------------
+   Barra de acciones y total
+--------------------------------- */
+#Carrito .text-end{
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: .6rem;
+  align-items: center;
+  text-align: right;
+}
+#Carrito .text-end h4{
+  order: -1;          /* coloca el total a la izquierda de los botones */
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-text);
+}
+#Carrito .text-end .btn{
+  min-width: 120px;
+  height: 36px;
+  padding: 0 12px;
+  font-size: .9rem;
+  border-radius: 8px;
+  box-shadow: none;
+}
+#Carrito .text-end .btn-primary,
+#Carrito .text-end .btn-danger{
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+#Carrito .text-end .btn-primary:hover,
+#Carrito .text-end .btn-danger:hover{
+  background: color-mix(in srgb, var(--color-primary) 10%, #fff);
+  border-color: var(--color-primary);
+}
+/* --------------------------------
+   Colores de botones según paleta
+--------------------------------- */
+#Carrito .btn-primary{
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+#Carrito .btn-success{
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: #fff;
+}
+
+#Carrito .btn-danger{
+  background: var(--color-error);
+  border-color: var(--color-error);
+}
+
+/* --------------------------------
+   Avisos superiores
+--------------------------------- */
+.custom-alert.soft{
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius);
+  padding: var(--space-sm) var(--space-md);
+  margin: var(--space-md) auto;
+  box-shadow: none;
+  max-width: 1040px;
+}
+.custom-alert .alert-link{
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+.custom-alert .alert-link:hover{ text-decoration: none; }
+.custom-alert p { margin: 0; }
+
+/* --------------------------------
+   Responsive
+--------------------------------- */
+@media (max-width:576px){
+  .cantidad-btn{ width:32px; height:32px; }
+  .cantidad-badge{ min-width:40px; height:32px; line-height:30px; }
+}
+
+@media (max-width: 768px){
+  #Carrito .text-end{
+    min-width: 100%;
+    height: 40px;
+    font-size: .95rem;
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  #Carrito .text-end h4{ order: 0; }
+  #Carrito .text-end .btn{ width: 100%; }
+  .banner{ height: 200px; }
+}

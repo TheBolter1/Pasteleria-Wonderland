@@ -1,0 +1,28 @@
+/* Reset y base global mínima */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font-family);
+  color:var(--color-text);
+  line-height:var(--line-height);
+  background:var(--color-bg);
+  display:flex;            /* para sticky footer */
+  flex-direction:column;
+}
+main{ flex:1; }
+img{max-width:100%;display:block}
+.banner{
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+}
+/* Enlaces */
+a{ color:inherit; }
+a:hover{ opacity:.95 }
+
+/* Titulares base */
+h1,h2,h3{ margin:0 0 .5rem }
+h2{font-family: "Marcellus", serif;}

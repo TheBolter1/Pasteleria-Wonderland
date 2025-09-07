@@ -1,0 +1,165 @@
+/* =============================
+   Home – Secciones específicas
+   ============================= */
+
+/* ---------- Banner superior ---------- */
+#bannerInicio{
+  width: 100%;
+  background: var(--color-primary);
+  margin: 0 0 3rem 0;
+  text-align: center;
+}
+#bannerInicio a{
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #fff;
+  padding: 1rem 0;
+  font-weight: 1000;
+  /* Tamaño fluido entre móvil y desktop */
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  transition: background-color .2s ease;
+}
+#bannerInicio a:hover{ background: var(--color-secondary); }
+#bannerInicio a:focus-visible{
+  outline: 3px solid #fff;
+  outline-offset: -3px;
+  box-shadow: 0 0 0 3px rgba(0,0,0,.15);
+}
+@media (min-width: 768px){
+  #bannerInicio a{ padding: 1.25rem 0; }
+}
+
+/* ---------- Productos más vendidos ---------- */
+/* -------- Productos más vendidos -------- */
+.productos-mas-vendidos { padding-block: var(--space-xl); }
+
+/* título */
+.productos-mas-vendidos h2{
+  font-family: "Marcellus", serif;   
+  font-weight: 700; 
+  letter-spacing:.02em;
+  margin-bottom:1.5rem;
+  font-size:clamp(1.4rem,1rem + 1.2vw,2rem);
+  text-align:center; /* refuerza el .text-center por si falta Bootstrap */
+}
+
+/* columnas: hace que todas las cards tengan la misma altura */
+#productos-mas-vendidos-container > [class*="col"]{
+  display:flex;
+}
+#productos-mas-vendidos-container .card{
+  flex:1;               /* estira la card dentro de la columna */
+}
+
+/* tarjeta base */
+.productos-mas-vendidos .card{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  border-radius:16px;
+  border:1px solid var(--color-border);
+  box-shadow:var(--shadow-sm);
+  transition:transform .12s ease, box-shadow .12s ease;
+  overflow:hidden;
+}
+.productos-mas-vendidos .card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-md);
+}
+
+/* imagen consistente */
+.productos-mas-vendidos .card img{
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  display:block;
+}
+
+/* cuerpo y título (clamp para 2 líneas) */
+.productos-mas-vendidos .card .card-body{
+  display:flex; flex-direction:column; gap:.25rem;
+  padding:1.25rem;
+}
+.productos-mas-vendidos .card .card-title{
+  margin-bottom:.25rem;
+  display:-webkit-box;
+  -webkit-line-clamp:2; line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  min-height:3rem; /* alinea títulos entre cards */
+}
+
+/* precio + botón al fondo */
+.productos-mas-vendidos .card .precio{
+  font-weight:600; color:var(--color-text); margin-top:.25rem;
+}
+.productos-mas-vendidos .card .btn{
+  margin-top:auto;
+  width:100%; height:var(--h-button);
+  border-radius:var(--radius);
+  background:var(--color-primary); color:#fff; border:0;
+  box-shadow:var(--shadow-sm);
+}
+.productos-mas-vendidos .card .btn:hover{ filter:brightness(.95); }
+
+/* ---------- Mini-noticia destacada ---------- */
+#Noticia{
+  max-width: 1120px;
+  margin: var(--space-xl) auto;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border-left: 6px solid var(--color-primary);
+}
+
+/* Evita heredar estilos del header global */
+#Noticia > header{
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+#Noticia h2{  
+  margin: 0 0 .25rem 0;
+  font-size: clamp(1.25rem, 1.1rem + 1vw, 1.75rem);
+  line-height: 1.2;
+  color: var(--color-text);
+}
+#Noticia .meta{
+  color: var(--color-muted);
+  font-size: var(--font-size-sm);
+  margin: .25rem 0 .75rem;
+}
+#Noticia p{ margin: .5rem 0 1rem; }
+#Noticia .resumen{ margin:.25rem 0 1rem 1rem; }
+
+#Noticia .video{ margin-top: .75rem; }
+#Noticia .video iframe{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  border: 0;
+  border-radius: var(--radius);
+}
+
+/* Botón de acción dentro de la noticia (usa utilidades) */
+#Noticia .btn-primario{
+  background: var(--color-primary);
+  color:#fff;
+  border:0;
+  border-radius: var(--radius);
+  padding:.75rem 1rem;
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+}
+#Noticia .btn-primario:hover{ filter: brightness(.95); }
+
+/* Responsive */
+@media (max-width: 768px){
+  #Noticia{ margin: var(--space-md); padding: 1rem; }
+}

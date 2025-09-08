@@ -155,36 +155,98 @@ function renderCart() {
   }
   totalSpan.textContent = total.toLocaleString('es-CL');
 }
+document.addEventListener("DOMContentLoaded", renderCart);
+
+function renderProductos() {
+  const catalogo = JSON.parse(localStorage.getItem("catalogoProductos")) || [];
+  const contenedor = document.getElementById("productos-container");
+  if (!contenedor) return;
+
+  // Leer categoría desde URL
+  const params = new URLSearchParams(window.location.search);
+  const categoria = params.get("categoria");
+  const productosMostrar = categoria ? catalogo.filter(p => p.categoria === categoria) : catalogo;
+
+  // Título dinámico
+  const titulo = document.querySelector('main h2');
+  if (titulo) titulo.textContent = categoria ? categoria : 'Nuestros Productos';
+
+  contenedor.innerHTML = "";
+
+  productosMostrar.forEach((prod, index) => {
+  const muestraTortas = document.createElement("div");
+  muestraTortas.className = "col-12 col-sm-6 col-md-4 col-lg-3";
+
+  // Botón de agregar al carrito
+  let boton = `<button class="btn btn-primary mt-auto text-white w-100" onclick="addToCart({
+    id: '${prod.id}',
+    nombre: '${prod.nombre}',
+    precio: ${prod.precio},
+    cantidad: 1
+  })">Agregar al carrito</button>`;
+
+  muestraTortas.innerHTML = `
+    <div class="card h-100 shadow-sm">
+      <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">${prod.nombre}</h5>
+        <p class="card-text">$${prod.precio.toLocaleString()}</p>
+        ${boton}
+      </div>
+    </div>
+  `;
+  contenedor.appendChild(muestraTortas);
+});
+
+}
+
 
 /* =========================================================================
    TIENDA / CATÁLOGO (productos.html)
    ========================================================================= */
-function renderProductos() {
-  const cont = document.getElementById('productos-container');
-  if (!cont) return;
+/* =========================================================================
+   TIENDA / CATÁLOGO (productos.html)
+   ========================================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  const catalogo = JSON.parse(localStorage.getItem("catalogoProductos")) || [];
+  const container = document.getElementById("top-ventas-container");
 
-  const params = new URLSearchParams(location.search);
-  const filtroCat = params.get('categoria'); // ?categoria=...
+  if (!container) return;
 
-  const lista = obtenerCatalogo();
-  const mostrar = filtroCat ? lista.filter(p => p.categoria === filtroCat) : lista;
+  // tomamos los primeros 4 productos
+  const topProductos = catalogo.slice(0, 4);
 
-  cont.innerHTML = mostrar.length
-    ? mostrar.map(p => `
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="card h-100 shadow-sm">
-          <img src="${p.imagen || ''}" class="card-img-top" alt="${p.nombre}">
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">${p.nombre}</h5>
-            <p class="card-text">$${Number(p.precio).toLocaleString('es-CL')}</p>
-            ${p.categoria ? `<small class="text-muted">${p.categoria}</small>` : ''}
-          </div>
+  topProductos.forEach((prod, index) => {
+    const crearElemento = document.createElement("div");
+    crearElemento.className = "col-12 col-sm-6 col-md-4 col-lg-3";
+
+    // Solo los primeros 2 productos tendrán el link funcional usando viewProduct()
+    let botonDetalle = '';
+    if(index === 0 || index === 1) {
+      botonDetalle = `<button class="btn btn-primary mt-auto text-white w-100" onclick="viewProduct('${prod.id}')">Ver Producto</button>`;
+    } else {
+      botonDetalle = `<button class="btn btn-secondary mt-auto text-white w-100" disabled>Ver Producto</button>`;
+    }
+
+    crearElemento.innerHTML = `
+      <div class="card h-100 shadow-sm">
+        <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">${prod.nombre}</h5>
+          <p class="card-text">$${prod.precio.toLocaleString()}</p>
+          ${botonDetalle}
         </div>
-      </div>`).join('')
-    : '<p class="text-muted">No hay productos.</p>';
-}
-function initProductosPage() {
-  if (document.getElementById("productos-container")) renderProductos();
+      </div>
+    `;
+
+    container.appendChild(crearElemento);
+  });
+});
+
+// Función para redireccionar al detalle
+function viewProduct(id) {
+  localStorage.setItem("productoSeleccionado", id);
+  window.location.href = "detalle.html";
 }
 
 /* =========================================================================
@@ -341,3 +403,61 @@ document.addEventListener("DOMContentLoaded", () => {
    COMPAT / NO-OP
    ========================================================================= */
 function initCarrito() { /* reservado por si luego separas vistas */ }
+
+if (!localStorage.getItem('catalogoProductos')) {
+    const productos = [ 
+      { id: "TC001", nombre: "Torta Cuadrada de Chocolate", precio: 45000, categoria: "Tortas Cuadradas", imagen: "assets/img/catalogo/tortas-cuadradas/cuadrada-chocolate.jpg" },
+      { id: "TC002", nombre: "Torta Cuadrada de Frutas", precio: 50000, categoria: "Tortas Cuadradas", imagen: "assets/img/catalogo/tortas-cuadradas/cuadrada-frutas.jpg" },
+      // ... resto de productos
+    ];
+    localStorage.setItem('catalogoProductos', JSON.stringify(productos));
+}
+
+
+                // Función para mostrar el detalle de un producto
+function renderDetalle(product) {
+  const contenedor = document.getElementById("detalle-producto");
+  if (!contenedor) return;
+
+  contenedor.innerHTML = `
+    <div class="col-md-6">
+      <img src="${product.imagen}" alt="${product.nombre}" class="img-fluid rounded shadow">
+    </div>
+    <div class="col-md-6">
+      <h2 class="mb-3">${product.nombre}</h2>
+      <p>${product.descripcion || "Una mezcla de frutas frescas y crema chantilly sobre un suave bizcocho de vainilla, ideal para celebraciones."}</p>
+      <h4 class="text-success mb-4">$${product.precio.toLocaleString()}</h4>
+      <button class="btn btn-primary w-100" onclick="addToCart({
+        id:'${product.id}', nombre:'${product.nombre}', precio:${product.precio}, cantidad:1
+      })">Agregar al carrito</button>
+    </div>
+  `;
+}
+
+// Cargar detalle al entrar a detalle.html
+document.addEventListener("DOMContentLoaded", () => {
+  const id = localStorage.getItem("productoSeleccionado");
+  if (!id) return;
+
+  const catalogo = JSON.parse(localStorage.getItem("catalogoProductos")) || [];
+  const producto = catalogo.find(p => p.id === id);
+  if (!producto) return;
+
+  renderDetalle(producto);
+});
+
+function viewProduct(id) {
+  localStorage.setItem("productoSeleccionado", id);
+
+  // Redireccionar según el id del producto
+  if (id === "TC001") {
+    window.location.href = "detalle1.html";
+  } else if (id === "TC002") {
+    window.location.href = "detalle2.html";
+  } else {
+    alert("Producto sin detalle disponible.");
+  }
+}
+document.addEventListener("DOMContentLoaded", () => {
+    renderProductos();
+});

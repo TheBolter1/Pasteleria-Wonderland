@@ -1,0 +1,114 @@
+:root{
+    --bg:#faf9fb; --card:#ffffff; --ink:#222; --muted:#666; --primary:#7a3cff;
+    --ring:#e7e3ff; --border:#e8e8ef;
+}
+html,body{background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+.wrap{max-width:1100px; margin-inline:auto; padding:24px; }
+header h1{font-size:clamp(1.25rem,2.5vw,1.6rem); margin:0 0 12px}
+header p{color:var(--muted); margin:0 0 24px}
+
+/* Tarjetas */
+.cardish{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px}
+.gap-16{display:grid; gap:16px}
+
+/* === Formulario (responsive + accesible) === */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="tel"],
+select,
+textarea{
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #fff;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  line-height: 1.35;
+  min-height: 44px;                 /* diana táctil cómoda */
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+input::placeholder,
+textarea::placeholder{ color: var(--muted, #6b7280); opacity: .75; }
+
+/* Foco visible (mejor UX que :focus a secas) */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  outline: none;
+  border-color: var(--ring, #0d6efd);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ring, #0d6efd) 25%, transparent);
+}
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible){ box-shadow: none; }
+
+/* Estados útiles */
+input:disabled,
+select:disabled,
+textarea:disabled{
+  background: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+[aria-invalid="true"],
+input:invalid,
+select:invalid,
+textarea:invalid{ border-color: var(--error, #dc3545); }
+[aria-invalid="true"]:focus-visible,
+input:invalid:focus-visible,
+select:invalid:focus-visible,
+textarea:invalid:focus-visible{
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--error, #dc3545) 20%, transparent);
+}
+
+/* Grupo de control */
+label{
+  font-weight: 600;
+  font-size: .95rem;
+}
+.ctl{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.help{ font-size: .875rem; color: var(--muted, #6b7280); }
+
+/* Acciones (botones) */
+.actions{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 6px;
+  flex-wrap: wrap;                  /* evita overflow en móviles */
+}
+.actions > *{ min-width: 120px; }   /* botones consistentes */
+
+/* --- Responsivo --- */
+@media (max-width: 768px){
+  label{ font-size: .93rem; }
+  .actions{ justify-content: stretch; }
+  .actions > *{ flex: 1 1 auto; }   /* botones llenan el ancho */
+}
+@media (max-width: 480px){
+  /* Evita zoom en iOS cuando el font-size < 16px */
+  input, select, textarea{ font-size: 16px; }
+}
+
+/* Respeta preferencias de movimiento del usuario */
+@media (prefers-reduced-motion: reduce){
+  input, select, textarea{ transition: none; }
+}
+
+/* Tabla “mostrar personal” */
+.tbl{width:100%; border-collapse: collapse; background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden}
+.tbl thead th{background:#f7f6fb; font-weight:700; text-transform:uppercase; letter-spacing:.02em; font-size:.8rem}
+.tbl th, .tbl td{padding:12px 14px; border-bottom:1px solid var(--border)}
+.tbl tbody tr:hover{background:#fafaff}
+
+/* Acordeón: espaciar bonito */
+.accordion-button{font-weight:700}
+.accordion-item{background:transparent; border:none}
+.accordion-body{padding:1rem 0}

@@ -335,6 +335,32 @@ function initContactoPage() {
 /* =========================================================================
    ADMINISTRADOR (administrador.html): modal y guardado de productos
    ========================================================================= */
+  document.getElementById('menu-edit-product')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    // TODO: navega a tu pestaña/listado de productos en modo edición:
+    // location.href = 'administrador.html#productos?mode=edit';
+    // o dispara un modal de edición si lo tienes:
+    // new bootstrap.Modal(document.getElementById('modalEditarProducto')).show();
+  });
+
+  document.getElementById('menu-show-product')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    // TODO: mostrar listado de productos:
+    // location.href = 'administrador.html#productos';
+  });
+
+  document.getElementById('menu-show-emp')?.addEventListener('click', () => {
+    window.location.href = 'personal.html';
+  });
+
+  document.getElementById('menu-show-emp')?.addEventListener('click', () => {
+    window.location.href = 'personal.html';
+  });
+
+  document.getElementById('menu-show-emp')?.addEventListener('click', () => {
+    window.location.href = 'personal.html';
+  });
+
 async function guardarProducto(e) {
   e.preventDefault();
   const $ = id => document.getElementById(id);

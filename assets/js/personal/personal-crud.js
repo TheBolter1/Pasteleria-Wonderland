@@ -1,13 +1,13 @@
 // ==== CRUD PERSONAL (crear, leer, editar, eliminar) ====
 (function(){
-  // Helpers y almacenamiento (nombres tal como los vienes usando)
+
   const fun   = s => document.querySelector(s);
   const KEY   = "personal_json";
   const read  = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
   const write = (arr) => localStorage.setItem(KEY, JSON.stringify(arr));
   const rut_Id = (pers) => `${String(pers.rut).trim()}-${String(pers.dv).trim().toLowerCase()}`;
 
-  // --------- RENDER TABLA ---------
+
   function renderizarTablaPersonal(){
     const tbody = fun("#personal-tabla tbody");
     if (!tbody) return;
@@ -29,7 +29,7 @@
     tbody.innerHTML = filas || `<tr><td colspan="6" class="text-center text-muted">Sin personal</td></tr>`;
   }
 
-  // --------- CREAR (form: #nuevo-personal-form) ---------
+
   function crearPersonalDesdeFormulario(){
     const formulario = fun("#nuevo-personal-form");
     if (!formulario) return;
@@ -58,7 +58,7 @@
     });
   }
 
-  // --------- EDITAR (abrir y precargar) ---------
+
   function abrirEdicion(id){
     const persona = read().find(x => rut_Id(x) === id);
     if (!persona) { alert("No se encontró el registro."); return; }
@@ -66,8 +66,8 @@
     const form = fun("#editar-personal-form");
     if (!form) return;
 
-    form.dataset.id                = id;             // a quién estamos editando
-    form.rut.value                 = persona.rut;    // RUT/DV son solo lectura en el HTML
+    form.dataset.id                = id;           
+    form.rut.value                 = persona.rut;    
     form.dv.value                  = persona.dv;
     form.nombres.value             = persona.nombres || "";
     form.apellido1.value           = persona.apellido1 || "";
@@ -79,7 +79,6 @@
     form.cargo.value               = persona.cargo || "";
   }
 
-  // --------- EDITAR (guardar) ---------
   function enlazarSubmitEdicion(){
     const form = fun("#editar-personal-form");
     if (!form) return;
@@ -99,7 +98,6 @@
       const i = lista.findIndex(x => rut_Id(x) === id);
       if (i === -1) { alert("No se pudo actualizar."); return; }
 
-      // No permitir cambiar RUT/DV
       const { rut, dv } = lista[i];
       lista[i] = { ...lista[i], ...datos, rut, dv };
 
@@ -109,15 +107,13 @@
     });
   }
 
-  // --------- ELIMINAR ---------
   function deletePersonalById(id) {
     const lista = read();
     const nuevaLista = lista.filter(pers => rut_Id(pers) !== id);
     write(nuevaLista);
-    return nuevaLista.length < lista.length; // true si borró algo
+    return nuevaLista.length < lista.length;
   }
 
-  // --------- BOTONES EN TABLA (editar / eliminar) ---------
   function enlazarBotonesTabla(){
     const tbody = fun("#personal-tabla tbody");
     if (!tbody) return;
@@ -137,7 +133,6 @@
     });
   }
 
-  // --------- INICIALIZACIÓN ---------
   window.addEventListener("DOMContentLoaded", ()=>{
     renderizarTablaPersonal();
     crearPersonalDesdeFormulario();
@@ -145,7 +140,6 @@
     enlazarSubmitEdicion();
   });
 
-  // Opcional: exponer la función de borrado si la necesitas en otro script
   window.deletePersonalById = deletePersonalById;
 
 })();
@@ -186,5 +180,5 @@ function validarPersonalBasico(pers){
   if(pers.telefono && pers.telefono.replace(/\D+/g,"").length < 9)
     return "Teléfono demasiado corto.";
 
-  return ""; // todo bien
+  return ""; 
 }

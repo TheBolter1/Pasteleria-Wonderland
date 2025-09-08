@@ -1,4 +1,3 @@
-
   /* ===== Configuración ===== */
   const KEY = 'pw_contactos';
 
@@ -117,12 +116,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Guardar en localStorage
-    const KEY = 'contactos';
-    const lista = JSON.parse(localStorage.getItem(KEY) || '[]');
+    const lista = leerContactos();
     lista.push(data);
-    localStorage.setItem(KEY, JSON.stringify(lista));
-
-    alert('¡Mensaje enviado!');
+    guardarContactos(lista);
+  
+    showAlert({ type:"success", title:"¡Mensaje enviado!", message:"Te responderemos a la brevedad." });
     form.reset();
     form.classList.remove('was-validated');
   }, true); // ← CAPTURE
@@ -138,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cuerpoTablaAdmin.innerHTML = lista.map((c, i) => `
         <tr>
           <td>${i + 1}</td>
-          <td>${new Date(c.fecha).toLocaleString('es-CL')}</td>
+          <td>${new Date(c.fechaISO || c.fecha).toLocaleString('es-CL')}</td>
           <td>${escaparHTML(c.nombre)}</td>
           <td><a href="mailto:${escaparHTML(c.correo)}">${escaparHTML(c.correo)}</a></td>
           <td>${escaparHTML(c.orden || '')}</td>
@@ -147,3 +145,27 @@ document.addEventListener('DOMContentLoaded', () => {
       `).join('');
     }
   }
+
+function showAlert({type="success", title="Listo", message="", duration=3000}) {
+  const wrap = document.getElementById("alerts");
+  const el = document.createElement("div");
+  el.className = `custom-alert soft ${type}`; // usa tus estilos de alerts.css
+  el.innerHTML = `
+    <div class="d-flex align-items-start gap-2">
+      <div>
+        <strong>${title}</strong>
+        ${message ? `<div class="small" style="opacity:.8">${message}</div>` : ""}
+      </div>
+      <button type="button" aria-label="Cerrar" class="ms-auto"
+              style="background:none;border:0;font-size:1.1rem;opacity:.6;cursor:pointer">&times;</button>
+    </div>`;
+  const close = () => { el.style.opacity="0"; el.style.transform="translateY(-6px)";
+                        setTimeout(()=>el.remove(), 220); };
+  el.querySelector("button").addEventListener("click", close);
+
+  el.style.opacity="0"; el.style.transform="translateY(-8px)";
+  el.style.transition="opacity .25s ease, transform .25s ease";
+  wrap.appendChild(el);
+  requestAnimationFrame(()=>{ el.style.opacity="1"; el.style.transform="translateY(0)"; });
+  if (duration) setTimeout(close, duration);
+}

@@ -1,8 +1,6 @@
-/* ===== Layout base sin #Admin ===== */
 html, body { height: 100%; }
 
 body{
-  /* variables (si no las traes de :root) */
   --color-bg: #f2f2f2;
   --color-light: #cccccc;
   --color-mid: #a5a5a5;
@@ -50,6 +48,8 @@ input, select, textarea{
 a{ color: var(--color-deep); text-decoration: none; }
 a:hover{ text-decoration: underline; }
 
+#offcanvasRight { --bs-offcanvas-width: 360px; }
+
 /* Footer fijo al fondo por el flex del body */
 #site-footer-admin{
   background: var(--color-light);
@@ -58,6 +58,24 @@ a:hover{ text-decoration: underline; }
   text-align: center;
   font-size: var(--font-size-sm, 0.95rem);
   color: var(--color-dark);
-  margin-top: auto;   /* <- clave para bajar */
+  margin-top: auto;   
   width: 100%;
+}
+
+@media (min-width: 1400px) {
+  #tabHome .col-xl-11 { flex: 0 0 auto; width: 95%; }
+}
+
+#tabla-contactos td:nth-child(6){ white-space: normal; word-break: break-word; }
+
+@media (max-width: 576px){
+  #tabla-contactos th:nth-child(1), #tabla-contactos td:nth-child(1), 
+  #tabla-contactos th:nth-child(5), #tabla-contactos td:nth-child(5){ 
+    display:none;
+  }
+}
+@media (max-width: 768px){
+  #tabla-contactos th:nth-child(4), #tabla-contactos td:nth-child(4){ 
+    display:none;
+  }
 }

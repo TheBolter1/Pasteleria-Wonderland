@@ -1,0 +1,53 @@
+/* === Detalle limpio (sin gradientes) === */
+main section.product-spotlight::after { content: none !important; }
+
+.product-spotlight{
+  background: #fff; /* banner blanco limpio */
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: clamp(16px, 2.5vw, 28px);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+/* quitar brillos/halos anteriores si existieran */
+.product-spotlight::after{ content: none !important; }
+
+/* Imagen integrada, sin exagerar sombras */
+.product-spotlight img{
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,.04);
+}
+
+/* ---- Precio sobrio y protagonista ---- */
+.price-wrap{
+  display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+  margin: .5rem 0 1rem 0;
+}
+/* La palabra “Precio” como etiqueta sutil */
+.price-badge{
+  background: transparent;
+  color: var(--color-muted);
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+/* Monto grande y limpio */
+.price-tag{
+  background: transparent;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+  display: inline-flex; align-items:baseline; gap:2px;
+  font-weight: 700;
+  color: var(--color-text);
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+  line-height: 1;
+}
+.price-tag .currency{ font-size: .8em; color: var(--color-muted); }
+.price-tag .amount{ color: var(--color-primary); letter-spacing:.3px; }

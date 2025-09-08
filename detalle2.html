@@ -16,55 +16,72 @@
   <link rel="stylesheet" href="assets/css/core/utilities.css">
   <link rel="stylesheet" href="assets/css/components/cards.css">
   <link rel="stylesheet" href="assets/css/components/alerts.css">
-  <link rel="stylesheet" href="assets/css/components/forms.css">
   <link rel="stylesheet" href="assets/css/section/home.css">
-  <link rel="stylesheet" href="assets/css/components/carousel.css">
+  <link rel="stylesheet" href="assets/css/components/forms.css">
+  <link rel="stylesheet" href="assets/css/pages/detalle.css?v=2">
 </head>
 <body>
   <!-- Header -->
-  <header>
-    <nav class="nav">
-      <img src="assets/img/logo.png" alt="Pastelería Wonderland" class="logo-img">
-      <ul class="menu">
-        <li class="menu-item"><a href="index.html">Inicio</a></li>
-        <li class="menu-item"><a href="productos.html">Productos</a></li>
-        <li class="menu-item"><a href="contacto.html">Contáctanos</a></li>
-        <li class="menu-item"><a href="login.html">Mi Cuenta</a></li>
-      </ul>
-      <a href="carrito.html" class="action-btn">Carrito</a>
-    </nav>
-  </header>
+    <header>
+      <nav class="nav">
+        <img src="assets/img/logo.png" alt="Pastelería Wonderland" class="logo-img">
+          <ul class="menu">
+          <li class="menu-item"><a href="index.html">Inicio</a></li>
 
+          <li class="menu-item has-children">
+              <a href="productos.html">Productos ▾</a>
+              <button class="submenu-toggle">▾</button>
+              <ul class="sub-menu">
+                <li class="menu-item"><a href="productos.html?categoria=Tortas Cuadradas">Tortas Cuadradas</a></li>
+                <li class="menu-item"><a href="productos.html?categoria=Tortas Circulares">Tortas Circulares</a></li>
+                <li class="menu-item"><a href="productos.html?categoria=Postres Individuales">Postres</a></li>
+                <li class="menu-item"><a href="productos.html?categoria=Pastelería Tradicional">Pastelería Tradicional</a></li>
+                <li class="menu-item"><a href="productos.html?categoria=Productos Sin Azúcar">Sin Azúcar</a></li>
+                <li class="menu-item"><a href="productos.html?categoria=Productos Sin Gluten">Sin Gluten</a></li>
+                <li class="menu-item"><a href="productos.html?categoria=Productos Veganos">Vegano</a></li>
+                <li class="menu-item"><a href="productos.html?categoria=Tortas Especiales">Tortas Especiales</a></li>
+                </ul>
+
+          <li class="menu-item"><a href="contacto.html">Contactanos</a></li>
+          <li class="menu-item"><a href="login.html">Mi Cuenta</a></li>
+          </ul>
+
+          <a href="carrito.html" class="action-btn">Carrito de Compras</a>
+      </nav>
+    </header>
   <!-- Main -->
-  <main class="container my-5">
-    <div class="row g-4 align-items-center" id="detalle-producto">
-      <div class="col-md-6">
-        <img src="assets/img/catalogo/tortas-cuadradas/cuadrada-frutas.jpg" 
-             alt="Torta Cuadrada de Frutas" 
-             class="img-fluid rounded shadow">
+  <main>
+    <section class="product-spotlight">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+          <img src="assets/img/catalogo/tortas-cuadradas/cuadrada-frutas.jpg" 
+              alt="Torta Cuadrada de Frutas" 
+              class="img-fluid rounded shadow">
+        </div>
+        <div class="col-md-6">
+          <h2 class="mb-3">Torta Cuadrada de Frutas</h2>
+          <p> Una mezcla de frutas frescas y crema chantilly sobre un suave bizcocho de vainilla, ideal para celebraciones.</p>
+          <div class="price-wrap mb-4">
+            <span class="price-badge">Precio</span>
+            <span class="price-tag"><span class="currency">$</span><span class="amount">50.000</span></span>
+          </div>
+          <button class="btn btn-primary w-100" 
+            onclick="addToCart({id:'TC002', nombre:'Torta Cuadrada de Frutas', precio:50000, cantidad:1})">
+            Agregar al carrito
+          </button>
+        </div>
       </div>
-      <div class="col-md-6">
-        <h2 class="mb-3">Torta Cuadrada de Frutas</h2>
-        <p> Una mezcla de frutas frescas y crema chantilly sobre un suave bizcocho de vainilla, ideal para celebraciones.</p>
-        <h4 class="text-success mb-4">$50.000</h4>
-        <button class="btn btn-primary w-100" 
-          onclick="addToCart({id:'TC002', nombre:'Torta Cuadrada de Frutas', precio:50000, cantidad:1})">
-          Agregar al carrito
-        </button>
-      </div>
-    </div>
-  </main>
-
+    </section>
   <!-- seccion productos que te podrian interesar -->
-  <section class="productos-mas-vendidos section-pad mt-5">
-    <div class="container">
-      <h2 id="top-ventas-letra">Productos que te podrian interesar</h2>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center"
-           id="top-ventas-container">
+    <section class="productos-mas-vendidos section-pad mt-5">
+      <div class="container">
+        <h2 id="top-ventas-letra">Productos que te podrian interesar</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center"
+            id="top-ventas-container">
+        </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
 
    <!--Footer-->
     <footer class="site-footer" role="contentinfo">

@@ -114,3 +114,6 @@ function generarIdPorCategoria(categoria) {
   });
 })();
 
+
+// listener del form
+document.getElementById('formProducto')?.addEventListener('submit', guardarProducto);

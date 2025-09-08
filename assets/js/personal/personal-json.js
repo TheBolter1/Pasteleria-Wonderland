@@ -2,7 +2,7 @@
 (async function seedPersonalFromJson(){
   const KEY = "personal_json";
   if (!localStorage.getItem(KEY)) {
-    const respuesta = await fetch("assets/json/personal.json"); 
+    const respuesta = await fetch('assets/json/personal.json', { cache: 'no-store' });
     const listaPersonal = await respuesta.json();
     
     const pers_norm = listaPersonal.map(pers => ({ ...pers, rut: String(pers.rut).trim(), dv: String(pers.dv).trim() }));

@@ -36,15 +36,17 @@
   </header>
 
   <!-- Main -->
-  <main class="container my-5">
-    <div class="row g-4 align-items-center">
-      <div class="col-md-6">
-        <img src="assets/img/catalogo/tortas-cuadradas/cuadrada-chocolate.jpg" alt="Torta Cuadrada de Chocolate" class="img-fluid rounded shadow">
-      </div>
-      <div class="col-md-6">
-        <h2 class="mb-3">Torta Cuadrada de Chocolate</h2>
-        <p>Deliciosa torta de chocolate con capas de ganache y un toque de avellanas. Personalizable con mensajes especiales.</p>
-        <h4 class="text-success mb-4">$45.000</h4>
+<main class="container my-5">
+  <div class="row g-4 align-items-center">
+    <div class="col-md-6">
+      <img src="assets/img/catalogo/tortas-cuadradas/cuadrada-chocolate.jpg" 
+           alt="Torta Cuadrada de Chocolate" 
+           class="img-fluid rounded shadow">
+    </div>
+    <div class="col-md-6">
+      <h2 class="mb-3">Torta Cuadrada de Chocolate</h2>
+      <p>Deliciosa torta de chocolate con capas de ganache y un toque de avellanas. Personalizable con mensajes especiales.</p>
+      <h4 class="text-success mb-4">$45.000</h4>
       <button class="btn btn-primary w-100" 
         onclick="addToCart({ 
           id: 'TC001', 
@@ -52,12 +54,22 @@
           precio: 45000, 
           cantidad: 1 
         })">
-  Agregar al carrito
-</button>
+        Agregar al carrito
+      </button>
+    </div>
+  </div>
 
+  <!-- seccion productos que te podrian interesar -->
+  <section class="productos-mas-vendidos section-pad mt-5">
+    <div class="container">
+      <h2 id="top-ventas-letra">Productos que te podrian interesar</h2>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center"
+           id="top-ventas-container">
       </div>
     </div>
-  </main>
+  </section>
+</main>
+  
 
    <!--Footer-->
     <footer class="site-footer" role="contentinfo">
